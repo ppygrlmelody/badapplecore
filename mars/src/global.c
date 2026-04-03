@@ -67,7 +67,7 @@ int     SWITCH_P;
 int	SWITCH_A;
 
 unsigned long loopDelay;
-unsigned long loopDelayAr[SPEEDLEVELS] = {1, 100000, 1, 100, 500, 2500, 10000, 40000, 100000};
+unsigned long loopDelayAr[SPEEDLEVELS] = {1, 10000, 1, 100, 500, 2500, 10000, 40000, 100000};
 
 #if defined(DOSTXTGRAPHX) || defined(DOSGRXGRAPHX) || defined(LINUXGRAPHX) \
     || defined(XWINGRAPHX)
