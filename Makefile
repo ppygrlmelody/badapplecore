@@ -6,6 +6,12 @@ WARRIOR_DIR:= ./warriors/
 #DELAY_US:= 25000
 DELAY_US:= 10000
 
+badapple:
+	#-v 104 enter display mode 4
+	#-s size of core
+	${BUILD_DIR}/pmars ${WARRIOR_DIR}/{badapplewhite,badappleblack}.red -v 104 -s 200
+
+
 all: ${BUILD_DIR}
 	cd ${SRC_DIR} && sed -i '70s/[^,]*/ ${DELAY_US}/'2 global.c
 	cd ${SRC_DIR} && make && mv pmars ../build
@@ -37,7 +43,8 @@ rave:
 debug:
 	#-e enter debugger
 	#-v 104 enter display mode 4
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/{rave,imp}.red -e -v 104
+	#-s size of core
+	${BUILD_DIR}/pmars ${WARRIOR_DIR}/{badapplewhite,badappleblack}.red -e -v 104 -s 201
 
 clean:
 	rm -rf ${BUILD_DIR}
