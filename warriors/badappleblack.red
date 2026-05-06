@@ -7,6 +7,13 @@
 ;strategy Draws the payload using the second process
 ;strategy to draw the odd pixels
 
+;Constants
+SCREEN_WIDTH  equ 10
+SCREEN_HEIGHT equ 10
+PADDING       equ 11
+
+WHITE_ENTRY   equ 2
+
 ;Set entry point
   org entry
 
@@ -37,8 +44,29 @@ copy
   mov.i <src, {scanner
   djn copy, count 
 
+  ;Split to copy
+  mov scanner, src
+  sub.a #(src-scanner), src
+  jmp *src
+
 payload
+  ;TODO: ZERO SCREEN
+  ;Start white
+  sub.a #(LAST-white_main)+WHITE_ENTRY, LAST+WHITE_ENTRY
+
+  ;Kill 1 child
+  spl (LAST)
+  spl (SCREEN_WIDTH+PADDING)+LAST
+  spl (SCREEN_WIDTH+PADDING)*2+LAST
+  spl (SCREEN_WIDTH+PADDING)*3+LAST
+  spl (SCREEN_WIDTH+PADDING)*1+LAST+1
+  spl (SCREEN_WIDTH+PADDING)*2+LAST+2
+  dat 0
+
+white_main
+  spl (SCREEN_WIDTH+PADDING)*2+LAST+3
   jmp 0
+
   dat 1, 2
   dat 3, 4
   dat 5, 6
