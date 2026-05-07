@@ -4,7 +4,8 @@ WARRIOR_DIR:= ./warriors/
 
 # Delay between frames in microseconds
 #DELAY_US:= 25000
-DELAY_US:= 10000
+#DELAY_US:= 10000
+DELAY_US:= 5000
 
 badapple:
 	#-v 104 enter display mode 4
