@@ -5,7 +5,7 @@ WARRIOR_DIR:= ./warriors/
 # Delay between frames in microseconds
 #DELAY_US:= 25000
 #DELAY_US:= 10000
-DELAY_US:= 5000
+DELAY_US:= 50
 
 badapple:
 	#-v 104 enter display mode 4
@@ -20,6 +20,11 @@ all: ${BUILD_DIR}
 ${BUILD_DIR}:
 	mkdir ${BUILD_DIR}
 
+big:
+	#-v 104 enter display mode 4
+	#-s size of core
+	#${BUILD_DIR}/pmars ${WARRIOR_DIR}/{badapplewhite,badappleblack}.red -v 104 -s 2000
+	${BUILD_DIR}/pmars ${WARRIOR_DIR}/{badapplewhite,badappleblack}.red -v 104 -r 15
 
 # The following few rules were for re-learning redcode
 imp:

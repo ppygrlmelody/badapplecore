@@ -10,7 +10,7 @@
 ;Constants
 SCREEN_WIDTH  equ 10
 SCREEN_HEIGHT equ 10
-PADDING       equ 11
+PADDING       equ 147
 
 WHITE_ENTRY   equ 2
 
@@ -98,6 +98,8 @@ ztarget dat 0, (SCREEN_WIDTH+PADDING)*4+LAST+4
   ;spl (SCREEN_WIDTH+PADDING)*4+LAST+2
   ;spl (SCREEN_WIDTH+PADDING)*4+LAST+3
   spl (SCREEN_WIDTH+PADDING)*4+LAST+4
+
+  djn 0,  #CORESIZE-1
 
   dat 0
 
