@@ -1,57 +1,26 @@
-SRC_DIR:= ./mars/src/
-BUILD_DIR:= ./mars/build/
-WARRIOR_DIR:= ./warriors/
+MARS_SRC:= ./mars/src/
+WARRIORS:= ./warriors/white.red ./warriors/black.red # Order is required
 
-# Delay between frames in microseconds
-#DELAY_US:= 25000
-#DELAY_US:= 10000
-DELAY_US:= 42069
+CFLAGS += -O -DEXT94
 
-badapple:
-	#-v 104 enter display mode 4
-	#-s size of core
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/{badapplewhite,badappleblack}.red -v 104 -s 200
+all: pmars ${WARRIORS}
+	./pmars ${WARRIORS}
 
+pmars: ${MARS_SRC}
+	cd ${MARS_SRC} &&\
+		make
+	mv -v ${MARS_SRC}/pmars .
 
-all: ${BUILD_DIR}
-	sed -i '4s/.*/#define BASEDELAY	${DELAY_US}/' ${SRC_DIR}/BASEDELAY.h
-	#cd ${SRC_DIR} && sed -i '70s/[^,]*/ ${DELAY_US}/'2 global.c
-	cd ${SRC_DIR} && make && mv pmars ../build
-
-${BUILD_DIR}:
-	mkdir ${BUILD_DIR}
-
-big:
-	#-v 104 enter display mode 4
-	#-s size of core
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/{badapplewhite,badappleblack}.red -v 104 -s 2000
-
-# The following few rules were for re-learning redcode
-imp:
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/imp.red
-useless:
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/useless.red
-boring:
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/boring.red
-boring2:
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/boring2.red
-boring3:
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/boring3.red
-dwarf:
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/dwarf.red
-copy:
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/copy.red
-copy2:
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/copy2.red
-rave:
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/rave.red
-	
-debug:
-	#-e enter debugger
-	#-v 104 enter display mode 4
-	#-s size of core
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/{badapplewhite,badappleblack}.red -e -v 104 -s 201
+${WARRIORS}: ./warriorgen/main.c
+	cd ./warriorgen/ &&\
+		make
+	mkdir -p ./warriors/
+	cp -v ./warriorgen/genblack.red ./warriors/black.red
+	cp -v ./warriorgen/genwhite.red ./warriors/white.red
 
 clean:
-	rm -rf ${BUILD_DIR}
-	cd ${SRC_DIR} && make clean
+	rm -rvf ./pmars warriors
+	cd ${MARS_SRC} &&\
+		make clean
+	cd ./warriorgen/ &&\
+		make clean

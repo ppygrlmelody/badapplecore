@@ -1,25 +1,38 @@
 #include <stdio.h>
 
-void genblack(FILE* fptr){
+void wheader(FILE* fptr, const char* name){
   // Warrior header
   fprintf(fptr, ";redcode-94\n");
-  fprintf(fptr, ";name Bad Apple Black\n");
+  fprintf(fptr, ";name Bad Apple %s\n", name);
   fprintf(fptr, ";author ppygrlmel\n");
   fprintf(fptr, ";assert 1\n"); //Shut up warning on warrior compilation by pmars
-
+  
   //TODO: Strategy
   fprintf(fptr, ";strategy TODO\n");
+
+  fprintf(fptr, "jmp  0\n");
+}
+
+void genblack(FILE* fptr){
+  wheader(fptr, "Black");
 }
 
 void genwhite(FILE* fptr){
-  // Warrior header
-  fprintf(fptr, ";redcode-94\n");
-  fprintf(fptr, ";name Bad Apple White\n");
-  fprintf(fptr, ";author ppygrlmel\n");
-  fprintf(fptr, ";assert 1\n"); //Shut up warning on warrior compilation by pmars
+  wheader(fptr, "White");
 
-  //TODO: Strategy
-  fprintf(fptr, ";strategy TODO\n");
+  // Strategy
+  fprintf(fptr, ";strategy Waits to get hijacked by black by idling after two\n");
+  fprintf(fptr, ";strategy identifier DATs.\n");
+  fprintf(fptr, ";strategy Serves as secondary color to generated image\n");
+
+  fprintf(fptr,
+      "   org  entry\n"
+      "IDENTA dat #112, #112\n" //'p', 'p'
+      "IDENTB dat #103, #109\n" //'g', 'm'
+      "entry\n"
+      "   jmp 0\n"
+      "   end\n"
+      );
 }
 
 int main(){

@@ -1,3 +1,8 @@
+# Binaries
+a.out
+gen
+pmars
+
 # Build files
 *.o
 
@@ -10,3 +15,6 @@ genwhite.red
 
 # Intermediate generated data
 data.red
+
+# Generated warriors
+warriors/
