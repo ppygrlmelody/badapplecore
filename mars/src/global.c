@@ -66,8 +66,10 @@ int     SWITCH_P;
 #endif
 int	SWITCH_A;
 
+#include "BASEDELAY.h"
+
 unsigned long loopDelay;
-unsigned long loopDelayAr[SPEEDLEVELS] = {1, 50, 1, 100, 500, 2500, 10000, 40000, 100000};
+unsigned long loopDelayAr[SPEEDLEVELS] = {1, BASEDELAY, 1, 100, 500, 2500, 10000, 40000, 100000};
 
 #if defined(DOSTXTGRAPHX) || defined(DOSGRXGRAPHX) || defined(LINUXGRAPHX) \
     || defined(XWINGRAPHX)

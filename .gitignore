@@ -3,3 +3,10 @@
 
 # Build dir
 build/
+
+# Intermediate generated warriors
+genblack.red
+genwhite.red
+
+# Intermediate generated data
+data.red

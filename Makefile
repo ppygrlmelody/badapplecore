@@ -5,7 +5,7 @@ WARRIOR_DIR:= ./warriors/
 # Delay between frames in microseconds
 #DELAY_US:= 25000
 #DELAY_US:= 10000
-DELAY_US:= 50
+DELAY_US:= 42069
 
 badapple:
 	#-v 104 enter display mode 4
@@ -14,7 +14,8 @@ badapple:
 
 
 all: ${BUILD_DIR}
-	cd ${SRC_DIR} && sed -i '70s/[^,]*/ ${DELAY_US}/'2 global.c
+	sed -i '4s/.*/#define BASEDELAY	${DELAY_US}/' ${SRC_DIR}/BASEDELAY.h
+	#cd ${SRC_DIR} && sed -i '70s/[^,]*/ ${DELAY_US}/'2 global.c
 	cd ${SRC_DIR} && make && mv pmars ../build
 
 ${BUILD_DIR}:
@@ -23,8 +24,7 @@ ${BUILD_DIR}:
 big:
 	#-v 104 enter display mode 4
 	#-s size of core
-	#${BUILD_DIR}/pmars ${WARRIOR_DIR}/{badapplewhite,badappleblack}.red -v 104 -s 2000
-	${BUILD_DIR}/pmars ${WARRIOR_DIR}/{badapplewhite,badappleblack}.red -v 104 -r 15
+	${BUILD_DIR}/pmars ${WARRIOR_DIR}/{badapplewhite,badappleblack}.red -v 104 -s 2000
 
 # The following few rules were for re-learning redcode
 imp:
