@@ -1,12 +1,13 @@
 MARS_SRC:= ./mars/src/
 WARRIORS:= ./warriors/white.red ./warriors/black.red # Order is required
 
-CFLAGS += -O -DEXT94
+DELAY_US:= 5000
 
 all: pmars ${WARRIORS}
 	./pmars ${WARRIORS}
 
 pmars: ${MARS_SRC}
+	sed -i '4s/.*/#define BASEDELAY ${DELAY_US}/' ${MARS_SRC}/BASEDELAY.h
 	cd ${MARS_SRC} &&\
 		make
 	mv -v ${MARS_SRC}/pmars .
