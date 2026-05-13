@@ -3,4 +3,4 @@ all: main.c
 	./gen
 
 clean:
-	rm -v gen genblack.red genwhite.red
+	rm -vf gen blackout.red whiteout.red

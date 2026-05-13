@@ -1,52 +1,42 @@
 #include <stdio.h>
 
-void wheader(FILE* fptr, const char* name){
-  // Warrior header
-  fprintf(fptr, ";redcode-94\n");
-  fprintf(fptr, ";name Bad Apple %s\n", name);
-  fprintf(fptr, ";author ppygrlmel\n");
-  fprintf(fptr, ";assert 1\n"); //Shut up warning on warrior compilation by pmars
-  
-  //TODO: Strategy
-  fprintf(fptr, ";strategy TODO\n");
+void genblack(FILE* fin, FILE* fout){
+  char c = 69;
 
-  fprintf(fptr, "jmp  0\n");
+  while(c != EOF){
+    c = getc(fin);
+    putc(c, fout);
+  }
 }
 
-void genblack(FILE* fptr){
-  wheader(fptr, "Black");
-}
+void genwhite(FILE* fin, FILE* fout){
+  char c = 69;
 
-void genwhite(FILE* fptr){
-  wheader(fptr, "White");
-
-  // Strategy
-  fprintf(fptr, ";strategy Waits to get hijacked by black by idling after two\n");
-  fprintf(fptr, ";strategy identifier DATs.\n");
-  fprintf(fptr, ";strategy Serves as secondary color to generated image\n");
-
-  fprintf(fptr,
-      "   org  entry\n"
-      "IDENTA dat #112, #112\n" //'p', 'p'
-      "IDENTB dat #103, #109\n" //'g', 'm'
-      "entry\n"
-      "   jmp 0\n"
-      "   end\n"
-      );
+  while(c != EOF){
+    c = getc(fin);
+    putc(c, fout);
+  }
 }
 
 int main(){
-  FILE* bfptr = fopen("genblack.red", "w");
-  FILE* wfptr = fopen("genwhite.red", "w");
+  FILE* binfptr = fopen("blackin.red", "r");
+  FILE* winfptr = fopen("whitein.red", "r");
 
-  if(!bfptr){ fprintf(stderr, "Failed to open file genblack.red\n"); }
-  if(!wfptr){ fprintf(stderr, "Failed to open file genwhite.red\n"); }
+  FILE* boutfptr = fopen("blackout.red", "w");
+  FILE* woutfptr = fopen("whiteout.red", "w");
 
-  genblack(bfptr);
-  genwhite(wfptr);
+  if(!binfptr){ fprintf(stderr, "Failed to open file blackin.red\n"); }
+  if(!winfptr){ fprintf(stderr, "Failed to open file whitein.red\n"); }
+  if(!boutfptr){ fprintf(stderr, "Failed to open file blackout.red\n"); }
+  if(!woutfptr){ fprintf(stderr, "Failed to open file whiteout.red\n"); }
 
-  fclose(bfptr);
-  fclose(wfptr);
+  genblack(binfptr, boutfptr);
+  genwhite(winfptr, woutfptr);
+
+  fclose(binfptr);
+  fclose(winfptr);
+  fclose(boutfptr);
+  fclose(woutfptr);
 
   return 0;
 }

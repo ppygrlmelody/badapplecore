@@ -10,8 +10,8 @@ pmars
 build/
 
 # Intermediate generated warriors
-genblack.red
-genwhite.red
+blackout.red
+whiteout.red
 
 # Intermediate generated data
 data.red
